@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 # $1 is the user link
 
+script_dir=$(dirname "$0")
+source "$script_dir/lib/common_functions.sh"
+
 # funtions
 
 # get the version of the python file
@@ -11,21 +14,6 @@ function get_version {
     echo "$version"
 }
 
-function verify_version {
-    echo "python$1"
-    if type -p python$1 &>/dev/null; then
-        error_message "python version already installed"
-    else
-        echo "installing provided python version"
-    fi
-}
-
-function error_message {
-    echo $1
-    echo "exiting script"
-    exit 1
-}
-
 function check_tgz {
     if [[ $1 != *.tgz ]]; then
         error_message "file provided does not end with .tgz"
@@ -34,30 +22,6 @@ function check_tgz {
 
 function get {
     wget "$1" --no-check-certificate
-}
-
-function check_if_exists {
-    if [ -f "$1" ]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
-function make_dir {
-
-    if check_if_exists "$1"; then
-        echo "path already exists"
-        echo "$1"
-        return
-    else
-        echo "creating path"
-        mkdir "$1"
-        if [ $? -ne 0 ]; then
-            error_message "failed to create path"
-        fi
-        pushd "$1"
-    fi
 }
 
 function python_install {
@@ -100,6 +64,6 @@ make_dir "$base_folder"
 get $1
 
 # installs the file
-# and removes the file
+# and removes the python folder/files
 python_install "$filename" "$base_folder"
 
