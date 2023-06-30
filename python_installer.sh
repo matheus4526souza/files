@@ -62,6 +62,10 @@ version=$(get_version "$1")
 verify_version "$version"
 
 # creates the base folder
+# if the folder already exists, first delete it.
+if check_if_exists "$base_folder"; then
+    rm -rf "$base_folder"
+fi
 make_dir "$base_folder"
 
 # downloads the file

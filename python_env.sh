@@ -11,12 +11,17 @@
 #source "/home/nebula/bash_scripts/lib/common_functions.sh" #"$script_dir/lib/common_functions.sh"
 source "__COMMON_FUNCTIONS_SH_PATH__"
 
+# makes sure to not use
+# python3 cuz it's from
+# linux default
 function check_python {
     if [ "$1" == 3 ]; then
         error_message "python3 is not supported"
     fi
 }
 
+# checks if the provided
+# python version is installed
 function verify_version {
     if type -p python$1 &>/dev/null; then
         echo "creating environment with python$1"
@@ -25,6 +30,7 @@ function verify_version {
     fi
 }
 
+# creates the python env
 function create {
     python_version="$1"
     environment_name="$2"
@@ -36,6 +42,9 @@ function create {
     python$python_version -m venv "$base_folder/$environment_name"
 }
 
+# activates the python env
+# need to run like this:
+# source $(python_env activate <environment name>)
 function activate {
     environment_name="$1"
     arg_cant_be_empty "$environment_name"
@@ -47,6 +56,7 @@ function activate {
     fi
 }
 
+# removes the python env
 function remove {
     environment_name="$1"
     arg_cant_be_empty "$environment_name"
@@ -57,6 +67,7 @@ function remove {
     fi
 }
 
+# lists the python envs
 function list {
     check_if_exists "$base_folder"
     if [ $? -ne 0 ]; then
@@ -65,19 +76,14 @@ function list {
     ls "$base_folder"
 }
 
+# checks if the user is root
 function check_original_user {
     if [ "$original_user" == "root" ]; then
         error_message "can not run as root, please run the Makefile"
     fi
 }
 
-if [ "$EUID" -ne 0 ]
-  then original_user=$(whoami)
-  else original_user=${SUDO_USER}
-fi
-base_folder="$(getent passwd $original_user | cut -d: -f6)/python_envs"
-check_original_user
-
+# prints the help
 function help {
     echo "python_env create <python version> <environment name>"
     echo "python_env activate <environment name>"
@@ -86,6 +92,16 @@ function help {
     echo "python_env help for more information"
 }
 
+# checks if the user is root
+if [ "$EUID" -ne 0 ]
+  then original_user=$(whoami)
+  else original_user=${SUDO_USER}
+fi
+base_folder="$(getent passwd $original_user | cut -d: -f6)/python_envs"
+check_original_user
+
+
+# small cli
 if [ "$1" == "create" ]; then
     root_confirm "to create an environment it needs to run as root"
     check_python_version_arg "$2"
