@@ -63,7 +63,7 @@ function check_python_version_arg {
 }
 
 function check_env_name {
-    if ! [[ $1 =~ ^[0-9_]+$ ]]; then
-        error_message "Environment name is not in the expected format (only numbers and underscores are allowed)"
+    if ! [[ $1 =~ ^[a-zA-Z0-9_]+$ ]]; then
+        error_message "Environment name is not in the expected format (only numbers, letters and underscores are allowed)"
     fi
 }
