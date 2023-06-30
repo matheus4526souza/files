@@ -8,8 +8,16 @@ function get_version {
     local version=$(dirname "$1")
     version=$(basename "$version")
     version=${version%.*}
-    version=${version//./}
     echo "$version"
+}
+
+function verify_version {
+    echo "python$1"
+    if type -p python$1 &>/dev/null; then
+        error_message "python version already installed"
+    else
+        echo "installing provided python version"
+    fi
 }
 
 function error_message {
@@ -75,10 +83,23 @@ base_folder="$(getent passwd $original_user | cut -d: -f6)/python_versions"
 filename=$(basename "$1")
 
 # main script
+
+# confirms if running with sudo/root
 root_confirm
+# checks if file is a tgz
 check_tgz "$1"
+# gets the version of the python file
+# is already installed
 version=$(get_version "$1")
+verify_version "$version"
+
+# creates the base folder
 make_dir "$base_folder"
+
+# downloads the file
 get $1
+
+# installs the file
+# and removes the file
 python_install "$filename" "$base_folder"
 
