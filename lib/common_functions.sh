@@ -33,3 +33,13 @@ function verify_version {
         echo "${3:-installing provided python version}"
     fi
 }
+
+function color_comment {
+    echo -e "\e[31m$1\e[0m $2"
+}
+
+function root_confirm {
+    if [ "$EUID" -ne 0 ]; then
+    error_message "${1:-need to run as root}"
+    fi
+}

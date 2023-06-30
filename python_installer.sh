@@ -35,12 +35,6 @@ function python_install {
     rm -r "$2"
 }
 
-function root_confirm {
-    if [ "$EUID" -ne 0 ]; then
-    error_message "need to run as root"
-    fi
-}
-
 # variables
 original_user=$(logname)
 base_folder="$(getent passwd $original_user | cut -d: -f6)/python_versions"
