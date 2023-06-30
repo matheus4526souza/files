@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # $1 python command, can not be empty
 # or python3/python to secure the
 # correct version of python
@@ -88,6 +88,8 @@ function help {
 
 if [ "$1" == "create" ]; then
     root_confirm "to create an environment it needs to run as root"
+    check_python_version_arg "$2"
+    check_env_name "$3"
     create "$2" "$3"
 elif [ "$1" == "activate" ]; then
     activate "$2"

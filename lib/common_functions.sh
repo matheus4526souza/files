@@ -45,7 +45,25 @@ function root_confirm {
 }
 
 function arg_cant_be_empty {
-    if [ "$1" == "" ]; then
-        error_message "environment name can not be empty"
+    if [ -z "$1" ]; then
+        error_message "no parameter provided"
+    fi
+}
+
+function check_number_of_args {
+    if [ "$#" -ne "$1" ]; then
+        error_message "wrong number of arguments"
+    fi
+}
+
+function check_python_version_arg {
+    if ! [[ $1 =~ ^[0-9]+(\.[0-9]{1,2})?$ ]]; then
+        error_message "python version is not valid"
+    fi
+}
+
+function check_env_name {
+    if ! [[ $1 =~ ^[0-9_]+$ ]]; then
+        error_message "Environment name is not in the expected format (only numbers and underscores are allowed)"
     fi
 }
