@@ -35,7 +35,7 @@ function verify_version {
 }
 
 function color_comment {
-    echo -e "\e[31m$1\e[0m $2"
+    echo -e "\e[31m$1\e[0m \e[32m$2\e[0m"
 }
 
 function root_confirm {

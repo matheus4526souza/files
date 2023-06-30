@@ -63,8 +63,6 @@ function check_original_user {
     fi
 }
 
-
-
 if [ "$EUID" -ne 0 ]
   then original_user=$(whoami)
   else original_user=${SUDO_USER}
@@ -88,10 +86,10 @@ elif [ "$1" == "list" ]; then
     list
     echo "----------------"
 elif [ "$1" == "help" ]; then
-    color_comment "python_env create <python version> <environment name>" "creates an environment with the provided python version at $base_folder/<environment name>"
-    color_comment "source \$(python_env activate <environment name>)" "it needs to run like this to activate the environment"
-    color_comment "python_env remove <environment name>" "removes the environment"
-    color_comment "python_env list" " lists all environments"
+    color_comment "python_env create <python version> <environment name>" ":creates an environment with the provided python version at $base_folder/<environment name>"
+    color_comment "source \$(python_env activate <environment name>)" ":it needs to run like this to activate the environment"
+    color_comment "python_env remove <environment name>" ":removes the environment"
+    color_comment "python_env list" ":lists all environments"
 elif [ "$1" == "" ]; then
     error_message "command not provided"
 elif [ "$1" == "falar" ]; then
