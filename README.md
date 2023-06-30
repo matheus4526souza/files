@@ -62,3 +62,11 @@ From the drop-down list, look for the path to your virtual environment's Python 
 Select it, and VSCode will use the Python interpreter from your virtual environment.
 <br>
 Replace *user*, *env_name*, and *version* with your actual username, the name of your virtual environment, and the Python version you're using, respectively.
+
+
+# future features
+
+show python version in list
+<br>
+make tests for all bash scripts
+<br>
