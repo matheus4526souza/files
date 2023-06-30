@@ -28,7 +28,8 @@ function verify_version {
 function create {
     python_version="$1"
     environment_name="$2"
-
+    arg_cant_be_empty "$python_version"
+    arg_cant_be_empty "$environment_name"
     check_python "$python_version"
     verify_version "$python_version"
     make_dir "$base_folder/$environment_name"
@@ -37,6 +38,7 @@ function create {
 
 function activate {
     environment_name="$1"
+    arg_cant_be_empty "$environment_name"
     if check_if_exists "$base_folder/$environment_name"; then
         echo "environment activated" 1>&2
         echo $base_folder/$environment_name/bin/activate
@@ -47,9 +49,7 @@ function activate {
 
 function remove {
     environment_name="$1"
-    if [ "$environment_name" == "" ]; then
-        error_message "environment name can not be empty"
-    fi
+    arg_cant_be_empty "$environment_name"
     if check_if_exists "$base_folder/$environment_name"; then
         rm -rf "$base_folder/$environment_name"
     else

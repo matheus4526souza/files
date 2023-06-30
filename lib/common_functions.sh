@@ -43,3 +43,9 @@ function root_confirm {
     error_message "${1:-need to run as root}"
     fi
 }
+
+function arg_cant_be_empty {
+    if [ "$1" == "" ]; then
+        error_message "environment name can not be empty"
+    fi
+}

@@ -20,4 +20,6 @@ python_env help
 - **`python_env list`** : lists all environments
 ```
 
-example for ```python_env create```
+creating an environment:
+```sudo python_env create 3.11 test_env```
+if python version do not exist, it will raise an error.
