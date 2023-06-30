@@ -19,3 +19,5 @@ python_env help
 - **`python_env remove <environment name>`** : removes the environment
 - **`python_env list`** : lists all environments
 ```
+
+example for ```python_env create```

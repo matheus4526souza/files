@@ -17,6 +17,14 @@ function check_python {
     fi
 }
 
+function verify_version {
+    if type -p python$1 &>/dev/null; then
+        echo "creating environment with python$1"
+    else
+        error_message "python$1 is not installed"
+    fi
+}
+
 function create {
     python_version="$1"
     environment_name="$2"
@@ -31,9 +39,9 @@ function activate {
     environment_name="$1"
     if check_if_exists "$base_folder/$environment_name"; then
         echo "environment activated" 1>&2
+        echo $base_folder/$environment_name/bin/activate
     else
         error_message "environment does not exist"
-    echo $base_folder/$environment_name/bin/activate
     fi
 }
 
@@ -43,7 +51,7 @@ function remove {
         error_message "environment name can not be empty"
     fi
     if check_if_exists "$base_folder/$environment_name"; then
-        rm -r -y "$base_folder/$environment_name"
+        rm -rf "$base_folder/$environment_name"
     else
         error_message "environment does not exist"
     fi
@@ -72,6 +80,7 @@ check_original_user
 
 
 if [ "$1" == "create" ]; then
+    root_confirm "to create an environment it needs to run as root"
     create "$2" "$3"
 elif [ "$1" == "activate" ]; then
     activate "$2"
