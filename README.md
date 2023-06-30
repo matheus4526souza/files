@@ -49,3 +49,9 @@ removing an environment:
 
 listing all environments:
 ``` python_env list ```
+
+# setting in vscode:
+ctrl + shift + p
+select interpreter
+find
+/home/<user>/python_envs/<env_name>/bin/python<version>
