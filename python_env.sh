@@ -78,6 +78,13 @@ fi
 base_folder="$(getent passwd $original_user | cut -d: -f6)/python_envs"
 check_original_user
 
+function help {
+    echo "python_env create <python version> <environment name>"
+    echo "python_env activate <environment name>"
+    echo "python_env remove <environment name>"
+    echo "python_env list"
+    echo "python_env help for more information"
+}
 
 if [ "$1" == "create" ]; then
     root_confirm "to create an environment it needs to run as root"
@@ -100,9 +107,7 @@ elif [ "$1" == "help" ]; then
     color_comment "python_env remove <environment name>" ":removes the environment"
     color_comment "python_env list" ":lists all environments"
 elif [ "$1" == "" ]; then
-    error_message "command not provided"
-elif [ "$1" == "falar" ]; then
-    echo $base_folder
+    help
 else
     error_message "command not recognized"
 fi

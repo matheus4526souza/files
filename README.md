@@ -50,8 +50,10 @@ removing an environment:
 listing all environments:
 ``` python_env list ```
 
-# setting in vscode:
-ctrl + shift + p
-select interpreter
-find
-/home/<user>/python_envs/<env_name>/bin/python<version>
+# Setting up VSCode with the virtual environment:
+Press `Ctrl + Shift + P` to open the command palette in VSCode.
+Search for `Python: Select Interpreter`.
+From the drop-down list, look for the path to your virtual environment's Python interpreter. It should be something like:
+`/home/<user>/python_envs/<env_name>/bin/python<version>`.
+Select it, and VSCode will use the Python interpreter from your virtual environment.
+Replace <user>, <env_name>, and <version> with your actual username, the name of your virtual environment, and the Python version you're using, respectively.
