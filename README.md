@@ -21,7 +21,7 @@ python_env help
 - `python_env remove <environment name>`
     > removes the environment
 - `python_env list`
-    > lists all environments
+    > lists all environments <env_name> <python_version>
 ```
 
 creating an environment:
@@ -49,6 +49,11 @@ removing an environment:
 
 listing all environments:
 ``` python_env list ```
+<br>
+```
+env_1 python3.10
+env_2 python3.9
+```
 
 # Setting up VSCode with the virtual environment:
 Press `Ctrl + Shift + P` to open the command palette in VSCode.
@@ -65,8 +70,5 @@ Replace *user*, *env_name*, and *version* with your actual username, the name of
 
 
 # future features
-
-show python version in list
-<br>
 make tests for all bash scripts
 <br>

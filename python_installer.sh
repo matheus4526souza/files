@@ -21,7 +21,6 @@ function check_tgz {
     fi
 }
 
-
 # downloads the file from the url
 # and checks if it was successful
 function get {

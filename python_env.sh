@@ -7,9 +7,16 @@
 # needs to check if the environment
 # already exists, if so, fail it
 
-#script_dir=$(dirname "$0")
-#source "/home/nebula/bash_scripts/lib/common_functions.sh" #"$script_dir/lib/common_functions.sh"
-source "__COMMON_FUNCTIONS_SH_PATH__"
+if [ -e "__COMMON_FUNCTIONS_SH_PATH__" ]; then
+    source "__COMMON_FUNCTIONS_SH_PATH__"
+    else
+    script_dir=$(dirname "$0")
+    source "$script_dir/lib/common_functions.sh"
+fi
+
+# script_dir=$(dirname "$0")
+# source "/home/nebula/bash_scripts/lib/common_functions.sh" #"$script_dir/lib/common_functions.sh"
+# source "__COMMON_FUNCTIONS_SH_PATH__"
 
 # makes sure to not use
 # python3 cuz it's from
@@ -74,7 +81,17 @@ function list {
     if [ $? -ne 0 ]; then
         error_message "no environments created"
     fi
-    ls "$base_folder"
+    for env_name in $(ls $base_folder); do
+        for folder_envs in $(find $base_folder/$env_name/bin/*); do
+            for env in $folder_envs; do
+                filename=$(basename $env)
+                if [[ $filename =~ ^python[0-9]+\.[0-9]+$ ]]; then
+                    echo $(color_comment $env_name $filename)
+                    break
+                fi
+            done
+        done
+    done
 }
 
 # checks if the user is root
@@ -120,7 +137,7 @@ elif [ "$1" == "help" ]; then
     color_comment "python_env create <python version> <environment name>" ":creates an environment with the provided python version at $base_folder/<environment name>"
     color_comment "source \$(python_env activate <environment name>)" ":it needs to run like this to activate the environment"
     color_comment "python_env remove <environment name>" ":removes the environment"
-    color_comment "python_env list" ":lists all environments"
+    color_comment "python_env list" ":environments <env_name> <python_version>"
 elif [ "$1" == "" ]; then
     help
 else
