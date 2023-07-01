@@ -67,3 +67,12 @@ function check_env_name {
         error_message "Environment name is not in the expected format (only numbers, letters and underscores are allowed)"
     fi
 }
+
+function get_username {
+
+    if [ "$EUID" -ne 0 ]; then
+        echo $(whoami)
+    else
+        echo ${SUDO_USER}
+    fi
+}

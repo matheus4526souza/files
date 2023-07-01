@@ -40,6 +40,7 @@ function create {
     verify_version "$python_version"
     make_dir "$base_folder/$environment_name"
     python$python_version -m venv "$base_folder/$environment_name"
+    sudo chown -R $original_user "$base_folder/$environment_name"
 }
 
 # activates the python env
@@ -92,11 +93,7 @@ function help {
     echo "python_env help for more information"
 }
 
-# checks if the user is root
-if [ "$EUID" -ne 0 ]
-  then original_user=$(whoami)
-  else original_user=${SUDO_USER}
-fi
+original_user=$(get_username)
 base_folder="$(getent passwd $original_user | cut -d: -f6)/python_envs"
 check_original_user
 

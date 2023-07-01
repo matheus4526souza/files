@@ -44,7 +44,7 @@ function python_install {
 }
 
 # variables
-original_user=$(logname)
+original_user=$(get_username)
 base_folder="$(getent passwd $original_user | cut -d: -f6)/python_versions"
 filename=$(basename "$1")
 
