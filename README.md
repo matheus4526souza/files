@@ -70,5 +70,10 @@ Replace *user*, *env_name*, and *version* with your actual username, the name of
 
 
 # future features
+
+add the script python_installer.sh to be a command in the python_env like:
+<br>
+python_env install <link>
+<br>
 make tests for all bash scripts
 <br>
