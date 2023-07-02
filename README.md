@@ -11,6 +11,9 @@ example:
 # Env control
 
 ### python_env.sh
+
+there are autocomplete for all commands, and it will autocomplete the environment name too.
+
 ```
 make install
 python_env help
@@ -41,7 +44,7 @@ sudo python_env create 3.9 test
 - <prints path where the environment is at>
 ```
 
-activating an environment:
+activating an environment, the autocomplete won't work here:
 ``` source $(python_env activate test) ```
 
 removing an environment:

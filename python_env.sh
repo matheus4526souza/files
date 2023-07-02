@@ -53,8 +53,8 @@ function create {
 function activate {
     environment_name="$1"
     arg_cant_be_empty "$environment_name"
+    echo -e "make sure to use \e[34msource \$(python_env activate $1)\e[0m to activate the environment" 1>&2
     if check_if_exists "$base_folder/$environment_name"; then
-        echo "environment activated" 1>&2
         echo $base_folder/$environment_name/bin/activate
     else
         error_message "environment does not exist"

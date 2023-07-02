@@ -1,5 +1,5 @@
 function error_message {
-    echo $1
+    echo -e $1
     echo "exiting script"
     exit 1
 }
@@ -64,7 +64,7 @@ function check_python_version_arg {
 
 function check_env_name {
     if ! [[ $1 =~ ^[a-zA-Z0-9_]+$ ]]; then
-        error_message "Environment name is not in the expected format (only numbers, letters and underscores are allowed)"
+        error_message "Environment name is not in the expected format (only numbers, letters and underscores are allowed)" >&2
     fi
 }
 
