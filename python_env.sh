@@ -14,13 +14,10 @@ if [ -e "__COMMON_FUNCTIONS_SH_PATH__" ]; then
     source "$script_dir/lib/common_functions.sh"
 fi
 
-# script_dir=$(dirname "$0")
-# source "/home/nebula/bash_scripts/lib/common_functions.sh" #"$script_dir/lib/common_functions.sh"
-# source "__COMMON_FUNCTIONS_SH_PATH__"
-
 # makes sure to not use
 # python3 cuz it's from
 # linux default
+
 function check_python {
     if [ "$1" == 3 ]; then
         error_message "python3 is not supported"
