@@ -34,6 +34,11 @@ function get {
 function python_install {
     sudo apt-get update
     sudo apt-get install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev
+    local version=$(get_version "$1")
+    if [[ $string =~ ^3\.10 ]]; then
+    
+        sudo apt install python3.10-venv
+    fi
     tar -xf $1
     python_folder=$(basename "$1" .tgz)
     $python_folder/configure --enable-optimizations
