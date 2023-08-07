@@ -36,7 +36,7 @@ function python_install {
     sudo apt-get install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev
     local version=$(get_version "$1")
     if [[ $string =~ ^3\.10 ]]; then
-    
+
         sudo apt install python3.10-venv
     fi
     tar -xf $1
@@ -62,8 +62,8 @@ check_tgz "$1"
 
 # gets the version of the python file
 # is already installed
-version=$(get_version "$1")
-verify_version "$version"
+# version=$(get_version "$1")
+# verify_version "$version"
 
 # creates the base folder
 # if the folder already exists, first delete it.
